@@ -4,3 +4,5 @@
 *.Rds
 *.rds
 .Rproj.user
+img/*
+results/cobre_aal/*
