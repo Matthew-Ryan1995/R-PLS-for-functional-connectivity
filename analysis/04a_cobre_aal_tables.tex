@@ -1,0 +1,129 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={03\_cobre\_aal\_tables},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{03\_cobre\_aal\_tables}
+\author{}
+\date{\vspace{-2.5em}2022-11-17}
+
+\begin{document}
+\maketitle
+
+\begin{table}[htbp]
+
+\caption{\label{tab:cobreAalCvResults}Mean (sd) 10-fold cross validation results for Riemannian PLS on the cobre_aal dataset for the first five latent variables extracted.  The full model metrics are the multivariate $R^2$ and RMSE on recovering both age and subject group.  The group classification metrics look at the classification accuracy of the Riemannian PLS model for subject group only.  All metrics are optimised at $K = 2$ (blue).}
+\centering
+\begin{tabular}[t]{lr>{}r|rrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Full model metrics} & \multicolumn{3}{c}{Group classification} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-6}
+K & \$R\textasciicircum{}2\$ & RMSE & Accuracy & Sensitivity & Specificity\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.22 (0.033)} & \cellcolor{gray!6}{1.22 (0.034)} & \cellcolor{gray!6}{0.63 (0.037)} & \cellcolor{gray!6}{0.7 (0.045)} & \cellcolor{gray!6}{0.56 (0.055)}\\
+2 & 0.35 (0.04) & 1.11 (0.042) & 0.8 (0.039) & 0.85 (0.044) & 0.74 (0.061)\\
+\cellcolor{blue!20}{\cellcolor{gray!6}{3}} & \cellcolor{blue!20}{\cellcolor{gray!6}{0.43 (0.034)}} & \cellcolor{blue!20}{\cellcolor{gray!6}{1.04 (0.042)}} & \cellcolor{blue!20}{\cellcolor{gray!6}{0.79 (0.034)}} & \cellcolor{blue!20}{\cellcolor{gray!6}{0.8 (0.049)}} & \cellcolor{blue!20}{\cellcolor{gray!6}{0.78 (0.03)}}\\
+4 & 0.41 (0.033) & 1.06 (0.037) & 0.78 (0.039) & 0.77 (0.053) & 0.78 (0.048)\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{0.41 (0.032)} & \cellcolor{gray!6}{1.06 (0.036)} & \cellcolor{gray!6}{0.78 (0.039)} & \cellcolor{gray!6}{0.77 (0.053)} & \cellcolor{gray!6}{0.78 (0.048)}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+
+\caption{\label{tab:cobreAalCvCompare}Mean (sd) 10-fold cross validation results for Riemannian PLS on the cobre_aal dataset, as well as Euclidean PLS using the raw correlations and the Fisher transformed correlations.  The value $K$ represents the optimal number of latent variables for each setting.  The full model metrics are the multivariate $R^2$ and RMSE on recovering both age and subject group.  The group classification metrics look at the classification accuracy of the PLS model for subject group only.  Riemannian PLS is the best model over all model metrics.}
+\centering
+\begin{tabular}[t]{>{}l|>{}lll}
+\toprule
+ & Riemannian (K =3) & Raw correlations (K =3) & Fisher correlations (K =3)\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Full model metrics (SE)}}\\
+\em{\hspace{1em}\cellcolor{gray!6}{\$R\textasciicircum{}2\$}} & \textbf{\cellcolor{gray!6}{0.43 (0.034)}} & \cellcolor{gray!6}{0.38 (0.043)} & \cellcolor{gray!6}{0.23 (0.036)}\\
+\em{\hspace{1em}RMSE} & \textbf{1.04 (0.042)} & 1.08 (0.047) & 1.21 (0.026)\\
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Group classification (SE)}}\\
+\em{\hspace{1em}\cellcolor{gray!6}{Accuracy}} & \textbf{\cellcolor{gray!6}{0.79 (0.034)}} & \cellcolor{gray!6}{0.76 (0.038)} & \cellcolor{gray!6}{0.74 (0.032)}\\
+\em{\hspace{1em}Sensitivity} & \textbf{0.8 (0.049)} & 0.75 (0.063) & 0.72 (0.055)\\
+\em{\hspace{1em}\cellcolor{gray!6}{Specificity}} & \textbf{\cellcolor{gray!6}{0.78 (0.03)}} & \cellcolor{gray!6}{0.76 (0.03)} & \cellcolor{gray!6}{0.76 (0.048)}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

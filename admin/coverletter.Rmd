@@ -1,0 +1,30 @@
+---
+title: 'Cover letter: Submission for Connectomics collection of Scientific Reports'
+author: "Matt Ryan, School of Computer and Mathematical Sciences, The University of Adelaide."
+date: "2023-06-30"
+output: pdf_document
+---
+
+Dear guest editors for the **Connectomics** collection Associate Professor Arantza Barrios, Associate Professor Mukesh Dhamala, and Professor Ryuta Mizutani.
+
+Please find our attached paper *Capturing functional connectomics using Riemannian partial least squares* that presents a new methodology for analysing functional connectomics using functional magnetic resonance imaging.  This work provides a new general framework that has potential to be applied to multimodal imaging studies to further understand the human connectome.  As such, we believe this work will fit well in the **Connectomics** collection of *Scientific Reports*.
+
+The contents of this paper were developed in the corresponding authors PhD and are being presented in a talk format at MODSIM2023 in July, 2023.  A pre-print version of this paper has been upload to the ArXiv and will be available from July 3, 2023.
+
+Two appropriate reviewers for this work may be:
+
+1. Associate Professor Tom Fletcher, University of Virginia, email: *ptf8v\@virginia.edu*
+2. Professor Stefan Sommer, University of Copenhagen, email: *sommer\@di.ku.dk*
+
+We have had brief contact with Associate Professor Dhamala about whether investigating functional connectomics would be appropriate for this collection.
+
+
+Kind regards,
+
+Matt Ryan (corresponding author)
+
+School of Computer and Mathematical Sciences, The University of Adelaide
+
+Adelaide, South Australia, Australia, 5005
+
+Email: *matthew.ryan\@adelaide.edu.au*

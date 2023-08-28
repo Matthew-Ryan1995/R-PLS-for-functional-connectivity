@@ -1,0 +1,136 @@
+---
+title: "Untitled"
+author: "Matt Ryan"
+date: "2023-08-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse, phdWork)
+```
+
+
+```{r}
+m1 <- read_rds("results/cobre_rpls_model_K_3.Rds")
+```
+
+```{r}
+data <- cobre$cors
+```
+
+
+
+
+```{r}
+preds <- predict.riemannian_pls(m1, newdata = data, 
+                                type_x = "affine", type_y = "euclidean", method = "tangent")
+```
+
+```{r}
+tmp <- preds %>% 
+  as_tibble() %>% 
+  add_column(gp = cobre$group)
+```
+
+```{r}
+yardstick::roc_curve(tmp, groupPatient, truth=gp) %>% 
+  autoplot()
+```
+
+```{r}
+m2 <- read_rds("results/abide_rpls_model_K_6.Rds")
+```
+
+```{r}
+data <- abide_aal$cors
+
+```
+
+
+
+
+
+```{r}
+fits <- fitted.riemannian_pls(m2)
+```
+
+
+```{r}
+tmp <- fits %>% 
+  as_tibble() %>% 
+  add_column(gp = factor(abide_aal$group, c("Autism","Control")))
+```
+
+```{r}
+yardstick::roc_curve(tmp, groupAutism, truth=gp) %>% 
+  autoplot()
+```
+```{r}
+yardstick::roc_auc(tmp, groupAutism, truth=gp) 
+```
+
+```{r}
+## Matthew Ryan
+## 01/12/2022
+# packages ----------------------------------------------------------------
+
+pacman::p_load(tidyverse)
+
+source("code/create_vip_plot.R")
+source("code/calculate_vip.R")
+
+# COBRE --------------------------------------------------------------------
+dataset <- "cobre"
+height <- 7
+M <- read_rds("results/cobre_rpls_model_K_3.Rds")
+regions <- read_csv("data/msdl_rois_labels.csv",
+                    col_types = cols())
+
+Tmat <- do.call(cbind, M$scoresX)
+P.hat <- do.call(cbind, M$loadingsX)
+W.hat <- do.call(cbind, M$weightsX)
+C.hat <- do.call(cbind, M$weightsY)
+B <- map_dbl(M$reg_steps, ~.x$b1) %>%
+  diag()
+Y <- M$Y[[1]]
+
+beta <- W.hat %*% solve(t(P.hat) %*% W.hat) %*% B %*% t(C.hat)
+
+true_vip <- calculate_vip_per_y(Tmat = Tmat, W = W.hat, Y = Y, C = C.hat)
+single_vip <- calculate_vip(Tmat = Tmat, W = W.hat, Y = Y)
+```
+
+```{r}
+P_true <- unvec(P = M$muX, vec = beta[, 1])
+```
+
+```{r}
+library(reticulate)
+
+np = import("numpy")
+np$save("test_numpy.npy", r_to_py(P_true))
+```
+
+
+
+
+
+
+```{r}
+# Need to bind my CV results, colour by method
+cv_df <- read_rds("results/abide_cv_results_euclidean.Rds")
+```
+
+```{r}
+cv_df %>% 
+  filter(K < 10) %>% 
+  group_by(K) %>% 
+  summarise(m_rmse = mean(rmse), std_rmse = sd(rmse)/sqrt(n())) %>% 
+  ggplot(aes(x = K, y = m_rmse)) +
+  geom_point() +
+  geom_linerange(aes(ymin = m_rmse-std_rmse, ymax=m_rmse + std_rmse))
+```
+
+
+
