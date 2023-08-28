@@ -82,7 +82,7 @@ fit_and_test_single_fold <- function(cv_fold, formula = ~ 1, mc.cores = 1){
 
   # Largest K we will consider
   # May need to change this to n - max(seg_length) - 1
-  K <- 50#min(nrow(train_data) - 1,
+  K <- 10#min(nrow(train_data) - 1, #18/08/2023 changed to 10
            #choose(nrow(train_data$cors[[1]]) + 1, 2))
 
   # Get my X and Y

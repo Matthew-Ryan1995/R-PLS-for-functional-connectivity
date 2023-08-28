@@ -28,13 +28,36 @@ true_vip <- calculate_vip(Tmat = Tmat, W = W.hat, Y = Y)
 
 
 
+# fl <- list.files("results/abide_vip/", full.names = T)
+# sig <- map(fl, read_rds)
+# sig <- do.call(rbind, sig)
+# sig <- sig/200
+# sig[1:116, ] <- 1
+# sig <- sig %>%
+#   apply(2, p.adjust, method = "fdr")
+ordering <- rownames(beta)
+find_val <- function(s){
+  which(s == ordering)
+}
+
 fl <- list.files("results/abide_vip/", full.names = T)
 sig <- map(fl, read_rds)
 sig <- do.call(rbind, sig)
 sig <- sig/200
+sig <- sig %>% 
+  as_tibble(rownames = "pred") %>% 
+  mutate(nn = map_dbl(pred, find_val)) %>% 
+  arrange(nn) %>%
+  select(-nn) 
+sig_rows = sig$pred
+sig <- sig %>% 
+  select(-pred) %>% 
+  as.matrix()
+rownames(sig) <- sig_rows
 sig[1:116, ] <- 1
 sig <- sig %>%
   apply(2, p.adjust, method = "fdr")
+
 
 # colnames(true_vip) <- colnames(sig)[-1]
 
